@@ -49,7 +49,7 @@ claude mcp add --transport http us-federal-holidays https://us-federal-holidays-
 Or run it locally over stdio:
 
 ```
-claude mcp add us-federal-holidays -- npx -y github:theluckystrike/us-federal-holidays-business-days-mcp
+claude mcp add us-federal-holidays -- npx -y us-federal-holidays-business-days-mcp
 ```
 
 ### Claude Desktop
@@ -61,7 +61,7 @@ Add this to `claude_desktop_config.json`:
   "mcpServers": {
     "us-federal-holidays": {
       "command": "npx",
-      "args": ["-y", "github:theluckystrike/us-federal-holidays-business-days-mcp"]
+      "args": ["-y", "us-federal-holidays-business-days-mcp"]
     }
   }
 }
