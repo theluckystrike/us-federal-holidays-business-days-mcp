@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.theluckystrike/us-federal-holidays-business-days-mcp",
+  "title": "US Federal Holidays and Business Days",
+  "description": "Exact U.S. federal holidays and business days 1971-2100, OPM and Federal Reserve observance.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/theluckystrike/us-federal-holidays-business-days-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://us-federal-holidays-business-days-mcp.lipmichal.workers.dev/",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://us-federal-holidays-business-days-mcp.lipmichal.workers.dev/mcp"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "us-federal-holidays-business-days-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for exact U.S. federal holidays and business days: OPM and Federal Reserve observance, 1971-2100.",
+  "type": "module",
+  "license": "MIT",
+  "author": "theluckystrike",
+  "repository": { "type": "git", "url": "git+https://github.com/theluckystrike/us-federal-holidays-business-days-mcp.git" },
+  "homepage": "https://mcp.zovo.one/?utm_source=github&utm_medium=us-federal-holidays-business-days-mcp",
+  "mcpName": "io.github.theluckystrike/us-federal-holidays-business-days-mcp",
+  "bin": { "us-federal-holidays-business-days-mcp": "dist/stdio.js" },
+  "main": "dist/stdio.js",
+  "files": ["dist", "README.md", "LICENSE", "DATA_SOURCES.md"],
+  "engines": { "node": ">=20" },
+  "keywords": ["mcp", "mcp-server", "model-context-protocol", "federal-holidays", "business-days", "opm", "federal-reserve", "invoice-due-date"],
+  "scripts": {
+    "build": "tsc && chmod +x dist/stdio.js",
+    "test": "node --test",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.6.3",
+    "wrangler": "^4.45.0"
+  }
+}
