@@ -1,6 +1,21 @@
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import { createServer } from "./server.js";
 import { MONEY_URL, OPM_URL, FED_URL } from "./core.js";
+import { LATEST_PROTOCOL_VERSION } from '@modelcontextprotocol/sdk/types.js';
+
+/**
+ * Measured 2026-11-14 on the estate's hosted endpoint: a major MCP client sends tool calls with
+ * mcp-protocol-version 2026-07-28, newer than this SDK knows, and the SDK answers 400.
+ * A well-formed date newer than the SDK's latest is served as the latest; malformed or
+ * older values are left for the SDK to reject.
+ */
+export function normalizeProtocolVersion(request: Request): Request {
+  const v = request.headers.get('mcp-protocol-version')?.trim();
+  if (!v || !/^\d{4}-\d{2}-\d{2}$/.test(v) || v <= LATEST_PROTOCOL_VERSION) return request;
+  const headers = new Headers(request.headers);
+  headers.set('mcp-protocol-version', LATEST_PROTOCOL_VERSION);
+  return new Request(request, { headers });
+}
 
 const REPO = "https://github.com/theluckystrike/us-federal-holidays-business-days-mcp";
 
@@ -50,7 +65,7 @@ export default {
       const server = createServer();
       const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true });
       await server.connect(transport);
-      const res = await transport.handleRequest(request);
+      const res = await transport.handleRequest(normalizeProtocolVersion(request));
       const headers = new Headers(res.headers);
       for (const [k, v] of Object.entries(CORS)) headers.set(k, v);
       return new Response(res.body, { status: res.status, headers });
